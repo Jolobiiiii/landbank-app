@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Landbank – Online Banking</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <script src="https://unpkg.com/lucide@latest"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -30,23 +31,10 @@
       content: ''; position: absolute; inset: 0;
       background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     }
-    .hero::after {
-      content: ''; position: absolute; width: 500px; height: 500px;
-      border-radius: 50%; border: 1px solid rgba(255,255,255,0.08);
-      bottom: -180px; right: -180px; pointer-events: none;
-    }
-    .circle-deco {
-      position: absolute; width: 300px; height: 300px;
-      border-radius: 50%; border: 1px solid rgba(255,255,255,0.06);
-      bottom: -60px; right: -60px; pointer-events: none;
-    }
+    .hero::after { content: ''; position: absolute; width: 500px; height: 500px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.08); bottom: -180px; right: -180px; pointer-events: none; }
+    .circle-deco { position: absolute; width: 300px; height: 300px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.06); bottom: -60px; right: -60px; pointer-events: none; }
     .hero-logo { display: flex; align-items: center; gap: 14px; position: relative; z-index: 1; }
-    .hero-logo-icon {
-      width: 52px; height: 52px; background: var(--gold); border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 22px; font-weight: 700; color: var(--green-deep);
-      font-family: 'Playfair Display', serif; box-shadow: 0 4px 20px rgba(201,162,39,0.4);
-    }
+    .hero-logo-icon { width: 52px; height: 52px; background: var(--gold); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 700; color: var(--green-deep); font-family: 'Playfair Display', serif; box-shadow: 0 4px 20px rgba(201,162,39,0.4); }
     .hero-logo-text { color: var(--white); }
     .hero-logo-text span { display: block; }
     .hero-logo-text .brand { font-family: 'Playfair Display', serif; font-size: 20px; letter-spacing: 0.5px; }
@@ -56,63 +44,35 @@
     .hero-body h1 em { color: var(--gold-light); font-style: normal; }
     .hero-body p { color: rgba(255,255,255,0.65); font-size: 15px; line-height: 1.7; max-width: 380px; font-weight: 300; }
     .hero-features { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 16px; }
-    .feature-pill {
-      display: flex; align-items: center; gap: 12px;
-      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 12px; padding: 14px 18px; backdrop-filter: blur(8px);
-    }
-    .feature-pill .icon { font-size: 18px; }
-    .feature-pill span { color: rgba(255,255,255,0.85); font-size: 13.5px; }
-    .panel {
-      background: var(--white); display: flex; flex-direction: column;
-      justify-content: center; padding: 56px 52px;
-      border-left: 1px solid rgba(0,0,0,0.06);
-      box-shadow: -8px 0 40px rgba(0,0,0,0.06);
-    }
+    .feature-pill { display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 14px 18px; backdrop-filter: blur(8px); }
+    .feature-pill i { width: 20px; height: 20px; color: var(--gold-light); flex-shrink: 0; }
+    .feature-pill span { color: rgba(255,255,255,0.85); font-size: 13.5px; font-weight: 400; }
+    .panel { background: var(--white); display: flex; flex-direction: column; justify-content: center; padding: 56px 52px; border-left: 1px solid rgba(0,0,0,0.06); box-shadow: -8px 0 40px rgba(0,0,0,0.06); }
     .panel-header { margin-bottom: 36px; }
     .panel-header h2 { font-family: 'Playfair Display', serif; font-size: 28px; color: var(--green-deep); margin-bottom: 6px; }
     .panel-header p { font-size: 14px; color: var(--text-muted); font-weight: 300; }
     .form-group { margin-bottom: 20px; }
     .form-group label { display: block; font-size: 12.5px; font-weight: 600; color: var(--green-deep); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
     .input-wrap { position: relative; }
-    .input-wrap .input-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 16px; color: var(--text-muted); pointer-events: none; }
-    .input-wrap input {
-      width: 100%; padding: 13px 14px 13px 42px;
-      border: 1.5px solid #e5e7eb; border-radius: 10px;
-      font-family: 'DM Sans', sans-serif; font-size: 14.5px;
-      color: var(--text-dark); background: #fafafa;
-      transition: border-color 0.2s, box-shadow 0.2s; outline: none;
-    }
+    .input-wrap .input-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; color: var(--text-muted); pointer-events: none; }
+    .input-wrap input { width: 100%; padding: 13px 14px 13px 42px; border: 1.5px solid #e5e7eb; border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 14.5px; color: var(--text-dark); background: #fafafa; transition: border-color 0.2s, box-shadow 0.2s; outline: none; }
     .input-wrap input:focus { border-color: var(--green-bright); background: #fff; box-shadow: 0 0 0 3px rgba(0,166,81,0.10); }
-    .input-wrap .toggle-pw { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--text-muted); font-size: 15px; transition: color 0.2s; }
+    .input-wrap .toggle-pw { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--text-muted); display: flex; align-items: center; justify-content: center; transition: color 0.2s; }
     .input-wrap .toggle-pw:hover { color: var(--green-mid); }
+    .input-wrap .toggle-pw i { width: 16px; height: 16px; }
     .form-extras { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
     .remember { display: flex; align-items: center; gap: 8px; cursor: pointer; }
     .remember input[type="checkbox"] { width: 15px; height: 15px; accent-color: var(--green-bright); cursor: pointer; }
     .remember span { font-size: 13px; color: var(--text-muted); }
     .forgot { font-size: 13px; color: var(--green-mid); text-decoration: none; font-weight: 500; }
     .forgot:hover { text-decoration: underline; }
-    .btn-login {
-      width: 100%; padding: 14px;
-      background: linear-gradient(135deg, var(--green-mid), var(--green-bright));
-      color: var(--white); font-family: 'DM Sans', sans-serif;
-      font-size: 15px; font-weight: 600; border: none; border-radius: 10px;
-      cursor: pointer; letter-spacing: 0.5px;
-      transition: transform 0.15s, box-shadow 0.2s;
-      box-shadow: 0 6px 20px rgba(0,104,56,0.3);
-    }
+    .btn-login { width: 100%; padding: 14px; background: linear-gradient(135deg, var(--green-mid), var(--green-bright)); color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; border: none; border-radius: 10px; cursor: pointer; letter-spacing: 0.5px; transition: transform 0.15s, box-shadow 0.2s; box-shadow: 0 6px 20px rgba(0,104,56,0.3); }
     .btn-login:hover { transform: translateY(-1px); box-shadow: 0 10px 28px rgba(0,104,56,0.38); }
     .btn-login:active { transform: translateY(0); }
     .btn-login:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
     .divider { display: flex; align-items: center; gap: 12px; margin: 24px 0; color: #d1d5db; font-size: 12px; }
     .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: #e5e7eb; }
-    .btn-enroll {
-      width: 100%; padding: 13px; background: transparent;
-      color: var(--green-mid); font-family: 'DM Sans', sans-serif;
-      font-size: 14.5px; font-weight: 600;
-      border: 1.5px solid var(--green-mid); border-radius: 10px;
-      cursor: pointer; transition: background 0.2s, color 0.2s;
-    }
+    .btn-enroll { width: 100%; padding: 13px; background: transparent; color: var(--green-mid); font-family: 'DM Sans', sans-serif; font-size: 14.5px; font-weight: 600; border: 1.5px solid var(--green-mid); border-radius: 10px; cursor: pointer; transition: background 0.2s, color 0.2s; }
     .btn-enroll:hover { background: var(--green-mid); color: var(--white); }
     .panel-footer { margin-top: 32px; padding-top: 20px; border-top: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; }
     .panel-footer p { font-size: 11.5px; color: #aaa; }
@@ -120,12 +80,15 @@
     .footer-links a { font-size: 11.5px; color: #aaa; text-decoration: none; }
     .footer-links a:hover { color: var(--green-mid); }
     .notice { display: flex; align-items: center; gap: 10px; background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 10px 14px; margin-bottom: 24px; }
+    .notice i { width: 16px; height: 16px; color: #92400e; flex-shrink: 0; }
     .notice span { font-size: 12.5px; color: #92400e; line-height: 1.5; }
     .alert { display: none; padding: 10px 14px; border-radius: 8px; font-size: 13px; margin-bottom: 16px; }
     .alert.success { display: block; background: #f0fdf4; border: 1px solid #86efac; color: #166534; }
     .alert.error   { display: block; background: #fef2f2; border: 1px solid #fca5a5; color: #991b1b; }
     @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
     .panel { animation: fadeUp 0.5s ease both; }
+    .hero-body { animation: fadeUp 0.6s 0.1s ease both; }
+    .hero-features { animation: fadeUp 0.6s 0.2s ease both; }
     @media (max-width: 840px) { .page { grid-template-columns: 1fr; } .hero { display: none; } .panel { padding: 48px 32px; box-shadow: none; border: none; } }
   </style>
 </head>
@@ -146,9 +109,9 @@
       <p>Access your accounts, manage transfers, pay bills, and more — securely and conveniently, anytime and anywhere.</p>
     </div>
     <div class="hero-features">
-      <div class="feature-pill"><span class="icon">🔒</span><span>256-bit SSL encrypted connection</span></div>
-      <div class="feature-pill"><span class="icon">⚡</span><span>Real-time fund transfers via InstaPay & PESONet</span></div>
-      <div class="feature-pill"><span class="icon">🏦</span><span>Over 400 branches and 2,000+ ATMs nationwide</span></div>
+      <div class="feature-pill"><i data-lucide="shield-check"></i><span>256-bit SSL encrypted connection</span></div>
+      <div class="feature-pill"><i data-lucide="zap"></i><span>Real-time fund transfers via InstaPay & PESONet</span></div>
+      <div class="feature-pill"><i data-lucide="landmark"></i><span>Over 400 branches and 2,000+ ATMs nationwide</span></div>
     </div>
     <div class="circle-deco"></div>
   </div>
@@ -161,27 +124,28 @@
     </div>
 
     <div class="notice">
-      <span>⚠️</span>
+      <i data-lucide="alert-triangle"></i>
       <span>Landbank will <strong>never</strong> ask for your password or OTP via call, SMS, or email.</span>
     </div>
 
-    <!-- Alert Box -->
     <div class="alert" id="alertBox"></div>
 
     <form onsubmit="handleLogin(event)">
       <div class="form-group">
         <label for="username">Username / Account No.</label>
         <div class="input-wrap">
-          <span class="input-icon">👤</span>
+          <i data-lucide="user" class="input-icon"></i>
           <input type="text" id="username" placeholder="Enter your username" autocomplete="username" required />
         </div>
       </div>
       <div class="form-group">
         <label for="password">Password</label>
         <div class="input-wrap">
-          <span class="input-icon">🔑</span>
+          <i data-lucide="lock" class="input-icon"></i>
           <input type="password" id="password" placeholder="Enter your password" autocomplete="current-password" required />
-          <button type="button" class="toggle-pw" onclick="togglePw()" id="toggleBtn">👁</button>
+          <button type="button" class="toggle-pw" onclick="togglePw()" id="toggleBtn">
+            <i data-lucide="eye" id="eyeIcon"></i>
+          </button>
         </div>
       </div>
       <div class="form-extras">
@@ -210,11 +174,19 @@
 </div>
 
 <script>
+  lucide.createIcons();
+
   function togglePw() {
-    const pw  = document.getElementById('password');
-    const btn = document.getElementById('toggleBtn');
-    if (pw.type === 'password') { pw.type = 'text';     btn.textContent = '🙈'; }
-    else                        { pw.type = 'password'; btn.textContent = '👁';  }
+    const pw   = document.getElementById('password');
+    const icon = document.getElementById('eyeIcon');
+    if (pw.type === 'password') {
+      pw.type = 'text';
+      icon.setAttribute('data-lucide', 'eye-off');
+    } else {
+      pw.type = 'password';
+      icon.setAttribute('data-lucide', 'eye');
+    }
+    lucide.createIcons();
   }
 
   function showAlert(message, type) {
@@ -243,7 +215,6 @@
       if (res.ok) {
         localStorage.setItem('token', data.token);
         showAlert('✅ ' + data.message, 'success');
-        // Redirect after 1 second
         setTimeout(() => { window.location.href = '/dashboard'; }, 1000);
       } else {
         showAlert('❌ ' + data.message, 'error');
